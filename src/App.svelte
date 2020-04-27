@@ -83,7 +83,6 @@
   }
 
   section {
-    border: 1px solid black;
     padding: 1em;
   }
 </style>
@@ -114,6 +113,7 @@
 </main>
 
 <!-- TODO
+- Style checked beats with a solid background, then the faded pink on top
 - Move some helpers to utils
 - start and stop the player with space bar
 - Make slider a component

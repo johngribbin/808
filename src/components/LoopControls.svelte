@@ -12,7 +12,6 @@
 
 <style>
   section {
-    border: 1px solid black;
     display: flex;
     padding: 1em;
   }
