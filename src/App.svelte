@@ -1,35 +1,59 @@
 <script>
   import { onMount } from "svelte";
+  import { cloneSequence } from "./utils";
+  import {
+    planet_rock,
+    confusion,
+    trans_europe_express,
+    jam_on_it,
+    disco,
+    blank
+  } from "./sequences";
   import { instruments } from "./instruments";
-  import { planet_rock } from "./sequences";
   import LoopControls from "./components/LoopControls.svelte";
   import SequenceSelector from "./components/SequenceSelector.svelte";
   import BeatHeaders from "./components/BeatHeaders.svelte";
   import Instrument from "./components/Instrument.svelte";
-  import Bpm from "./components/Bpm.svelte";
 
   onMount(async () => {
     await Tone.start();
   });
+
   // BPM of the sequencer
   let bpm = 126;
   // Subscribe BPM of Tone Transport to bpm variable
   $: Tone.Transport.bpm.value = bpm;
-  // set default sequence to "planet rock" by Bambaataa
-  let sequence = cloneSequence(planet_rock);
 
+  // Set default sequence to "planet rock" by Afrika Bambaataa
   let sequenceName = "planet_rock";
+  let sequence = [];
+  // Subscribe sequence variable to changes in sequence name to load in a different sequence
+  $: if (sequenceName === "planet_rock") {
+    sequence = cloneSequence(planet_rock);
+  } else if (sequenceName === "confusion") {
+    sequence = cloneSequence(confusion);
+  } else if (sequenceName === "trans_europe_express") {
+    sequence = cloneSequence(trans_europe_express);
+  } else if (sequenceName === "jam_on_it") {
+    sequence = cloneSequence(jam_on_it);
+  } else if (sequenceName === "disco") {
+    sequence = cloneSequence(disco);
+  } else if (sequenceName === "blank") {
+    sequence = cloneSequence(blank);
+  }
+
   // Ued by start and stop buttons and Tone.Transport
   let playing = false;
   // Subscribe the start and stop of the Transport to playing variable
   $: playing ? Tone.Transport.start() : Tone.Transport.stop();
+
   // Tracks the transport clock
   let index = 0;
+  // Subcribe beatCount to index and "16n" value passed to scheduleRepeat
+  $: beatCount = index % 16;
   // Pass to the scheduleRepeat call on Tone.Transport
   function repeat(time) {
-    // Use "16n" value passed to scheduleRepeat to get beatCount
-    let beatCount = index % 16;
-    // Highlights the "beats" in the sequence by toggling the "active" key value during each loop
+    // Highlight "beats" in the sequence by toggling the value of active key on each beat object during loop
     sequence = sequence.map(instrument => {
       return instrument.map((beat, beatIndex) => {
         if (beatIndex === beatCount) {
@@ -40,18 +64,11 @@
         }
       });
     });
-    // Update index with each loop of transort clock time
+    // Update index to keep track of transort clock
     index++;
   }
-
+  // Call repeat function in time with the Transport
   Tone.Transport.scheduleRepeat(repeat, "16n");
-
-  // const can be assigned
-  // nested objects within the array were being mutated
-  // so this creates a clone to ensure the original sequence can always be selected
-  function cloneSequence(sequence) {
-    return sequence.map(instrument => instrument.map(beat => ({ ...beat })));
-  }
 </script>
 
 <style>
@@ -73,13 +90,11 @@
     updateBpm={newBpm => (bpm = newBpm)}
     {playing}
     updatePlaying={bool => (playing = bool)}
-    {sequence}
     {sequenceName}
-    updateSequence={(newSequence, newSequenceName) => ((sequence = cloneSequence(newSequence)), (sequenceName = newSequenceName))} />
+    updateSequence={newSequenceName => (sequenceName = newSequenceName)} />
   <SequenceSelector
-    {sequence}
     {sequenceName}
-    updateSequence={(newSequence, newSequenceName) => ((sequence = cloneSequence(newSequence)), (sequenceName = newSequenceName))}
+    updateSequence={newSequenceName => (sequenceName = newSequenceName)}
     updateBpm={newBpm => (bpm = newBpm)} />
   <section>
     <BeatHeaders />
@@ -95,6 +110,10 @@
 </main>
 
 <!-- TODO
+- Move some helpers to utils
+- start and stop the player with space bar
+- Make slider a component
+- Make two different button components
 - Update all sliders with on:input that was added to volume of instruments
 - Remove export from files not receiving the value
 - Caight a bug where "Clear" did work as expected after jamming on a cleared out kit for a few minutes
@@ -108,4 +127,5 @@
 - Add some effects like reverb
 - Add a "ramp up" on tempo updates
 - Add a randomized arpeggiator sound to jam along with
+- The value of 16 could be made a variable to toggle, so if changed to 8, then update the number of beats rendered and the repeat function and the "16n" value passed to transport schedule
 -->

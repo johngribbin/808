@@ -1,16 +1,36 @@
 <script>
-  import {
-    disco,
-    planet_rock,
-    confusion,
-    trans_europe_express,
-    jam_on_it
-  } from "../sequences";
-
-  export let sequence;
+  import SequenceButton from "./SequenceButton.svelte";
   export let sequenceName;
   export let updateSequence;
   export let updateBpm;
+
+  let presets = [
+    {
+      sequence_name: "planet_rock",
+      label: "Afrika Bambaataa",
+      bpm: "127"
+    },
+    {
+      sequence_name: "trans_europe_express",
+      label: "Kraftwerk",
+      bpm: "98"
+    },
+    {
+      sequence_name: "jam_on_it",
+      label: "Newcleus",
+      bpm: "116"
+    },
+    {
+      sequence_name: "confusion",
+      label: "New Order",
+      bpm: "119"
+    },
+    {
+      sequence_name: "disco",
+      label: "Disco",
+      bpm: "126"
+    }
+  ];
 </script>
 
 <style>
@@ -20,54 +40,18 @@
     justify-content: space-between;
     padding: 1em;
   }
-
-  .highlight {
-    color: blue;
-    font-weight: bold;
-  }
 </style>
 
 <section>
   <h3>BEATS</h3>
-
-  <button
-    class:highlight={sequenceName === 'planet_rock'}
-    on:click={() => {
-      updateSequence(planet_rock, 'planet_rock');
-      updateBpm(127);
-    }}>
-    Afrika Bambaataa
-  </button>
-  <button
-    class:highlight={sequenceName === 'confusion'}
-    on:click={() => {
-      updateSequence(confusion, 'confusion');
-      updateBpm(119);
-    }}>
-    New Order
-  </button>
-  <button
-    class:highlight={sequenceName === 'trans_europe_express'}
-    on:click={() => {
-      updateSequence(trans_europe_express, 'trans_europe_express');
-      updateBpm(98);
-    }}>
-    Kraftwerk
-  </button>
-  <button
-    class:highlight={sequenceName === 'jam_on_it'}
-    on:click={() => {
-      updateSequence(jam_on_it, 'jam_on_it');
-      updateBpm(116);
-    }}>
-    Newcleus
-  </button>
-  <button
-    class:highlight={sequenceName === 'disco'}
-    on:click={() => {
-      updateSequence(disco, 'disco');
-      updateBpm(126);
-    }}>
-    Disco
-  </button>
+  {#each presets as preset}
+    <SequenceButton
+      {sequenceName}
+      updateSequenceAndBpm={() => {
+        updateSequence(preset.sequence_name);
+        updateBpm(preset.bpm);
+      }}
+      presetSequenceName={preset.sequence_name}
+      presetLabel={preset.label} />
+  {/each}
 </section>

@@ -1,6 +1,7 @@
 <script>
   import Bpm from "./Bpm.svelte";
-  import { blank } from "../sequences";
+  import LoopButton from "./LoopButton.svelte";
+  import SequenceButton from "./SequenceButton.svelte";
   export let bpm;
   export let updateBpm;
   export let playing;
@@ -15,26 +16,18 @@
     display: flex;
     padding: 1em;
   }
-
-  .highlight {
-    color: blue;
-    font-weight: bold;
-  }
 </style>
 
 <section>
   <Bpm {bpm} {updateBpm} />
-  <button class={!playing ? 'highlight' : null} on:click={updatePlaying(false)}>
-    Stop
-  </button>
-  <button class={playing ? 'highlight' : null} on:click={updatePlaying(true)}>
-    Play
-  </button>
-  <button
-    class:highlight={sequenceName === 'blank'}
-    on:click={() => {
-      updateSequence(blank, 'blank');
-    }}>
-    CLEAR
-  </button>
+  <LoopButton {playing} {updatePlaying} type="stop" />
+  <LoopButton {playing} {updatePlaying} type="play" />
+  <SequenceButton
+    {sequenceName}
+    updateSequenceAndBpm={() => {
+      updateSequence('blank');
+      updateBpm(120);
+    }}
+    presetSequenceName={'blank'}
+    presetLabel={'Clear'} />
 </section>

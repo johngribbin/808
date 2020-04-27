@@ -5,6 +5,7 @@
   export let instrumentPlayer;
 
   afterUpdate(() => {
+    // play instrument when this "beat" is active and checked in the sequence
     if (beat.checked && beat.active) {
       instrumentPlayer.start();
     }
@@ -37,7 +38,7 @@
 </style>
 
 <input
-  class={beat.active ? 'active' : ''}
+  class:active={beat.active}
   type="checkbox"
   checked={beat.checked}
   on:click={updateBeat} />

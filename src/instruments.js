@@ -1,4 +1,5 @@
-// Instrument labels and sample passed to each instrument component (row in the sequencer)
+// Instrument labels and samples passed to each instrument component (each row in the sequencer)
+// See ./sequences for the saved drum sequences
 export const instruments = [
   { label: "kick", sample: "./samples/808_kick.wav" },
   {
