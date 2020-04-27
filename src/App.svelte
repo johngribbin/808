@@ -18,12 +18,10 @@
   onMount(async () => {
     await Tone.start();
   });
-
   // BPM of the sequencer
   let bpm = 126;
   // Subscribe BPM of Tone Transport to bpm variable
   $: Tone.Transport.bpm.value = bpm;
-
   // Set default sequence to "planet rock" by Afrika Bambaataa
   let sequenceName = "planet_rock";
   let sequence = [];
@@ -41,12 +39,10 @@
   } else if (sequenceName === "blank") {
     sequence = cloneSequence(blank);
   }
-
   // Ued by start and stop buttons and Tone.Transport
   let playing = false;
   // Subscribe the start and stop of the Transport to playing variable
   $: playing ? Tone.Transport.start() : Tone.Transport.stop();
-
   // Tracks the transport clock
   let index = 0;
   // Subcribe beatCount to index and "16n" value passed to scheduleRepeat

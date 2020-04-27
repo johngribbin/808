@@ -1,18 +1,11 @@
 <script>
-  export let bpm;
-  export let updateBpm;
+  export let value;
+  export let updateValue;
+  export let min;
+  export let max;
 </script>
 
 <style>
-  label {
-    align-items: center;
-    display: flex;
-  }
-
-  #field {
-    margin-right: 0.5em;
-  }
-
   input[type="range"] {
     height: 38px;
     -webkit-appearance: none;
@@ -106,19 +99,4 @@
   }
 </style>
 
-<label>
-  <input
-    id="field"
-    type="number"
-    bind:value={bpm}
-    min={0}
-    max={180}
-    on:change={updateBpm(this.value)} />
-  BPM
-  <input
-    type="range"
-    bind:value={bpm}
-    min={0}
-    max={180}
-    on:change={updateBpm(this.value)} />
-</label>
+<input type="range" bind:value {min} {max} on:input={updateValue(this.value)} />

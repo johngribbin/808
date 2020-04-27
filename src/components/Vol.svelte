@@ -1,4 +1,5 @@
 <script>
+  import Slider from "./Slider.svelte";
   export let instrumentVolume;
   export let editVolume;
 </script>
@@ -8,15 +9,14 @@
     align-items: center;
     display: flex;
     height: 40px;
-    width: 40px;
+    width: 100%;
   }
 </style>
 
 <div>
-  <input
-    type="range"
-    bind:value={instrumentVolume}
+  <Slider
+    value={instrumentVolume}
+    updateValue={editVolume}
     min={-10}
-    max={10}
-    on:input={editVolume(this.value)} />
+    max={10} />
 </div>

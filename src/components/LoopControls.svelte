@@ -1,5 +1,5 @@
 <script>
-  import Bpm from "./Bpm.svelte";
+  import Tempo from "./Tempo.svelte";
   import LoopButton from "./LoopButton.svelte";
   import SequenceButton from "./SequenceButton.svelte";
   export let bpm;
@@ -19,7 +19,7 @@
 </style>
 
 <section>
-  <Bpm {bpm} {updateBpm} />
+  <Tempo {bpm} {updateBpm} />
   <LoopButton {playing} {updatePlaying} type="stop" />
   <LoopButton {playing} {updatePlaying} type="play" />
   <SequenceButton
