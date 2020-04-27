@@ -1,18 +1,25 @@
 <script>
-  export let bpm = 80;
-  // subscribe BPM of transport to bpm variable
-  $: Tone.Transport.bpm.value = bpm;
+  export let bpm;
+  export let updateBpm;
 </script>
 
 <style>
+  label {
+    align-items: center;
+    display: flex;
+  }
+
   #field {
+    margin-right: 0.5em;
   }
 
   input[type="range"] {
     height: 38px;
     -webkit-appearance: none;
     margin: 10px 0;
-    width: 100%;
+    margin-left: 0.5em;
+    max-width: 500px;
+    width: 50%;
   }
   input[type="range"]:focus {
     outline: none;
@@ -100,6 +107,18 @@
 </style>
 
 <label>
-  <input id="field" type="number" bind:value={bpm} min={0} max={180} />
-  <input type="range" bind:value={bpm} min={0} max={180} />
+  <input
+    id="field"
+    type="number"
+    bind:value={bpm}
+    min={0}
+    max={180}
+    on:change={updateBpm(this.value)} />
+  BPM
+  <input
+    type="range"
+    bind:value={bpm}
+    min={0}
+    max={180}
+    on:change={updateBpm(this.value)} />
 </label>

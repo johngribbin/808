@@ -1,121 +1,39 @@
 <script>
   import { onMount } from "svelte";
-  import SelectSequence from "./components/SelectSequence.svelte";
+  import { instruments } from "./instruments";
+  import { planet_rock } from "./sequences";
+  import LoopControls from "./components/LoopControls.svelte";
+  import SequenceSelector from "./components/SequenceSelector.svelte";
+  import BeatHeaders from "./components/BeatHeaders.svelte";
   import Instrument from "./components/Instrument.svelte";
   import Bpm from "./components/Bpm.svelte";
 
   onMount(async () => {
     await Tone.start();
   });
+  // BPM of the sequencer
+  let bpm = 126;
+  // Subscribe BPM of Tone Transport to bpm variable
+  $: Tone.Transport.bpm.value = bpm;
+  // set default sequence to "planet rock" by Bambaataa
+  let sequence = cloneSequence(planet_rock);
 
-  // The global sequence state
-  let sequence = [
-    // Instrument 1
-    [
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false }
-    ],
-    // Instrument 2
-    [
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false }
-    ],
-    // Instrument 3
-    [
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false }
-    ],
-    // Instrument 4
-    [
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: true, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false },
-      { checked: false, active: false }
-    ]
-  ];
-
-  // Instrument labels and sample passed to each instrument component (row in the sequencer)
-  const instruments = [
-    { label: "kick", sample: "./samples/808_kick.wav" },
-    {
-      label: "snare",
-      sample: "./samples/808_snare.wav"
-    },
-    {
-      label: "open hat",
-      sample: "./samples/808_open_hat.wav"
-    },
-    {
-      label: "closed hat",
-      sample: "./samples/808_closed_hat.wav"
-    }
-  ];
-
+  let sequenceName = "planet_rock";
+  // Ued by start and stop buttons and Tone.Transport
+  let playing = false;
+  // Subscribe the start and stop of the Transport to playing variable
+  $: playing ? Tone.Transport.start() : Tone.Transport.stop();
   // Tracks the transport clock
   let index = 0;
-
+  // Pass to the scheduleRepeat call on Tone.Transport
   function repeat(time) {
-    // Get the current position of
+    // Use "16n" value passed to scheduleRepeat to get beatCount
     let beatCount = index % 16;
-
+    // Highlights the "beats" in the sequence by toggling the "active" key value during each loop
     sequence = sequence.map(instrument => {
       return instrument.map((beat, beatIndex) => {
         if (beatIndex === beatCount) {
-          // highlight the beat in the sequence that is active
+          // highlights the beat in the sequence that is active
           return { ...beat, active: true };
         } else {
           return { ...beat, active: false };
@@ -128,32 +46,19 @@
 
   Tone.Transport.scheduleRepeat(repeat, "16n");
 
-  const updateSequence = newSequence => {
-    sequence = newSequence;
-  };
-
-  const play = () => {
-    Tone.Transport.start();
-  };
-
-  const stop = () => {
-    Tone.Transport.stop();
-  };
+  // const can be assigned
+  // nested objects within the array were being mutated
+  // so this creates a clone to ensure the original sequence can always be selected
+  function cloneSequence(sequence) {
+    return sequence.map(instrument => instrument.map(beat => ({ ...beat })));
+  }
 </script>
 
 <style>
   main {
     padding: 1em;
-    max-width: 1000px;
+    width: 1200px;
     margin: 0 auto;
-  }
-
-  h1 {
-    color: #ff3e00;
-
-    font-size: 4em;
-    font-weight: 100;
-    text-transform: uppercase;
   }
 
   section {
@@ -163,33 +68,44 @@
 </style>
 
 <main>
-  <h1>808 Sequencer</h1>
+  <LoopControls
+    {bpm}
+    updateBpm={newBpm => (bpm = newBpm)}
+    {playing}
+    updatePlaying={bool => (playing = bool)}
+    {sequence}
+    {sequenceName}
+    updateSequence={(newSequence, newSequenceName) => ((sequence = cloneSequence(newSequence)), (sequenceName = newSequenceName))} />
+  <SequenceSelector
+    {sequence}
+    {sequenceName}
+    updateSequence={(newSequence, newSequenceName) => ((sequence = cloneSequence(newSequence)), (sequenceName = newSequenceName))}
+    updateBpm={newBpm => (bpm = newBpm)} />
   <section>
-    <button on:click={play}>Play</button>
-    <button on:click={stop}>Stop</button>
-    <Bpm />
-  </section>
-  <SelectSequence {sequence} />
-  <section>
+    <BeatHeaders />
     {#each instruments as instrument, rowIndex}
       <!-- Each row in the sequencer renders an Instrument component -->
       <Instrument
         label={instrument.label}
         sample={instrument.sample}
         sequence={sequence[rowIndex]}
-        updater={(beatIndex, isChecked) => (sequence[rowIndex][beatIndex].checked = isChecked)} />
+        updateBeat={(beatIndex, isChecked) => (sequence[rowIndex][beatIndex].checked = isChecked)} />
     {/each}
   </section>
-
 </main>
 
 <!-- TODO
-- Add numbers of steps to top
-- Look into syncing Tone.Transport with Tone.Draw  
+- Update all sliders with on:input that was added to volume of instruments
+- Remove export from files not receiving the value
+- Caight a bug where "Clear" did work as expected after jamming on a cleared out kit for a few minutes
+- Work out why the slider doesn't change state until you release mouse
+- Move slider into its own component file
+- Not mobile responsive (although I have ideas)
+- Add more instruments (ideally all the 808 sounds)
+- Look into syncing Tone.Transport with Tone.Draw 
+- Look into issue of sounds going out of sync just slightly
+- Add overall volume bar
 - Add some effects like reverb
-- Add option to change the sequence
-- Add button to clear the sequence
-- Update tempo with a svelte slider 
-- Add a curve on tempo updates
-- Add a possible arpeggiator 
+- Add a "ramp up" on tempo updates
+- Add a randomized arpeggiator sound to jam along with
 -->

@@ -1,7 +1,7 @@
 <script>
   import { afterUpdate } from "svelte";
   export let beat;
-  export let updater;
+  export let updateBeat;
   export let instrumentPlayer;
 
   afterUpdate(() => {
@@ -40,4 +40,4 @@
   class={beat.active ? 'active' : ''}
   type="checkbox"
   checked={beat.checked}
-  on:click={updater} />
+  on:click={updateBeat} />
