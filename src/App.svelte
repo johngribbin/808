@@ -131,6 +131,8 @@
 </main>
 
 <!-- TODO
+- update default volume
+- change title of page and get a favicon
 - Need a paused state, the current "stopped" state is more like pause
 - Need triangle shapes
 - Style checked beats with a solid background, then the faded pink on top

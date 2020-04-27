@@ -24,6 +24,10 @@
     width: 40px;
   }
 
+  label:hover {
+    cursor: pointer;
+  }
+
   input {
     background: black;
     border: 4px solid black;
@@ -31,6 +35,10 @@
     height: 50%;
     width: 50%;
     -webkit-appearance: none;
+  }
+
+  input:hover {
+    cursor: pointer;
   }
 
   input:focus {
@@ -41,11 +49,13 @@
   .checked {
     background: rgba(255, 122, 230, 0.3);
     border-color: #ff7ae6;
+    box-shadow: 0 0 5px #ff7ae6;
   }
 
   /* styles the input when checkbox is active */
   .active {
     background: #6dcff6;
+    box-shadow: 0 0 5px #6dcff6;
   }
 </style>
 

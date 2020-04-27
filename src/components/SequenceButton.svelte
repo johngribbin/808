@@ -38,6 +38,10 @@
     text-transform: uppercase;
   }
 
+  button:hover {
+    cursor: pointer;
+  }
+
   .active {
     background: linear-gradient(
         0deg,

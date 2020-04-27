@@ -14,9 +14,5 @@
 </style>
 
 <div>
-  <Slider
-    value={instrumentVolume}
-    updateValue={editVolume}
-    min={-10}
-    max={10} />
+  <Slider value={instrumentVolume} updateValue={editVolume} min={-20} max={0} />
 </div>

@@ -35,6 +35,10 @@
     text-transform: uppercase;
   }
 
+  button:hover {
+    cursor: pointer;
+  }
+
   .active {
     background: linear-gradient(
         0deg,
@@ -49,6 +53,7 @@
 </style>
 
 <div>
+  <!-- TO DO - ADD a pause button -->
   {#if type === 'play'}
     <div on:click={updatePlaying(true)}>
       <button class:active={playing}>{type}</button>

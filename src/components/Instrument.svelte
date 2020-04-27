@@ -8,8 +8,8 @@
 
   // Create a player for each Instrument that will be called by each Beat component as sequence plays
   const instrumentPlayer = new Tone.Player(`${sample}`).toMaster();
-  // 0 is the default setting of a Tone.Player
-  let instrumentVolume = 0;
+  // Set default setting of a Tone.Player to -6
+  let instrumentVolume = -6;
   // Subscribe the volume of this instrument to the variable volume
   $: instrumentPlayer.volume.value = instrumentVolume;
 </script>
