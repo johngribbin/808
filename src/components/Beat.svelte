@@ -13,32 +13,49 @@
 </script>
 
 <style>
-  input {
-    background: white;
-    border: 3px solid black;
-    border-radius: 5px;
-    -webkit-appearance: none;
+  label {
+    align-items: center;
+    border: 2px solid #c8c8c8;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
     height: 40px;
     margin-right: 0.5em;
     width: 40px;
+  }
+
+  input {
+    background: black;
+    border: 4px solid black;
+    border-radius: 50%;
+    height: 50%;
+    width: 50%;
+    -webkit-appearance: none;
+  }
+
+  input:focus {
+    outline: none;
   }
 
   input:checked {
-    background: #abd;
   }
 
+  /* styles the label when checkbox is checked */
+  .checked {
+    background: rgba(255, 122, 230, 0.3);
+    border-color: #ff7ae6;
+  }
+
+  /* styles the input when checkbox is active */
   .active {
-    border: 3px solid red;
-    border-radius: 5px;
-    -webkit-appearance: none;
-    height: 40px;
-    margin-right: 0.5em;
-    width: 40px;
+    background: #6dcff6;
   }
 </style>
 
-<input
-  class:active={beat.active}
-  type="checkbox"
-  checked={beat.checked}
-  on:click={updateBeat} />
+<label class:checked={beat.checked}>
+  <input
+    class:active={beat.active}
+    type="checkbox"
+    checked={beat.checked}
+    on:click={updateBeat} />
+</label>

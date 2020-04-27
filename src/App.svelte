@@ -69,9 +69,17 @@
 
 <style>
   main {
+    background: radial-gradient(
+        50% 50% at 50% 50%,
+        rgba(255, 255, 255, 0.35) 0%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      #121115;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.5);
+    color: white;
     padding: 1em;
     width: 1200px;
-    margin: 0 auto;
+    margin: 3em auto;
   }
 
   section {

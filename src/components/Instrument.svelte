@@ -19,6 +19,7 @@
     /* Grid is used to lock each beat in the sequece below the numbers rendered by the BeatHeaders component */
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 3fr;
+    margin-bottom: 0.5em;
   }
 
   label {
