@@ -28,12 +28,7 @@
     box-shadow: 0px 16px 10px rgba(0, 0, 0, 0.6),
       inset 0px 1px 2px rgba(31, 29, 35, 0.75);
     border-radius: 10px;
-    color: radial-gradient(
-        50% 50% at 50% 50%,
-        rgba(255, 255, 255, 0.35) 0%,
-        rgba(255, 255, 255, 0) 100%
-      ),
-      #121115;
+    color: grey;
     height: 50px;
     margin-top: 7px;
     width: 95%;

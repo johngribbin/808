@@ -13,20 +13,29 @@
 <style>
   section {
     display: flex;
+    justify-content: space-between;
     padding: 1em;
+  }
+
+  div {
+    display: flex;
+    width: 45%;
+    justify-content: space-between;
   }
 </style>
 
 <section>
   <Tempo {bpm} {updateBpm} />
-  <LoopButton {playing} {updatePlaying} type="stop" />
-  <LoopButton {playing} {updatePlaying} type="play" />
-  <SequenceButton
-    {sequenceName}
-    updateSequenceAndBpm={() => {
-      updateSequence('blank');
-      updateBpm(120);
-    }}
-    presetSequenceName={'blank'}
-    presetLabel={'Clear'} />
+  <div>
+    <SequenceButton
+      {sequenceName}
+      updateSequenceAndBpm={() => {
+        updateSequence('blank');
+        updateBpm(120);
+      }}
+      presetSequenceName={'blank'}
+      presetLabel={'Clear'} />
+    <LoopButton {playing} {updatePlaying} type="stop" />
+    <LoopButton {playing} {updatePlaying} type="play" />
+  </div>
 </section>

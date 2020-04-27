@@ -37,9 +37,6 @@
     outline: none;
   }
 
-  input:checked {
-  }
-
   /* styles the label when checkbox is checked */
   .checked {
     background: rgba(255, 122, 230, 0.3);

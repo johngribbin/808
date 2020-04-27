@@ -76,43 +76,55 @@
       ),
       #121115;
     box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    padding-top: 5em;
+  }
+
+  #sequencer {
+    border: 2px solid #46c0f2;
+    box-shadow: 1px 1px 3px #000000;
+    border-radius: 10px;
     color: white;
     padding: 1em;
     width: 1200px;
-    margin: 3em auto;
+    margin: 0 auto;
   }
 
-  section {
+  #beat-section {
     padding: 1em;
   }
 </style>
 
 <main>
-  <LoopControls
-    {bpm}
-    updateBpm={newBpm => (bpm = newBpm)}
-    {playing}
-    updatePlaying={bool => (playing = bool)}
-    {sequenceName}
-    updateSequence={newSequenceName => (sequenceName = newSequenceName)} />
-  <SequenceSelector
-    {sequenceName}
-    updateSequence={newSequenceName => (sequenceName = newSequenceName)}
-    updateBpm={newBpm => (bpm = newBpm)} />
-  <section>
-    <BeatHeaders />
-    {#each instruments as instrument, rowIndex}
-      <!-- Each row in the sequencer renders an Instrument component -->
-      <Instrument
-        label={instrument.label}
-        sample={instrument.sample}
-        sequence={sequence[rowIndex]}
-        updateBeat={(beatIndex, isChecked) => (sequence[rowIndex][beatIndex].checked = isChecked)} />
-    {/each}
+  <section id="sequencer">
+    <LoopControls
+      {bpm}
+      updateBpm={newBpm => (bpm = newBpm)}
+      {playing}
+      updatePlaying={bool => (playing = bool)}
+      {sequenceName}
+      updateSequence={newSequenceName => (sequenceName = newSequenceName)} />
+    <SequenceSelector
+      {sequenceName}
+      updateSequence={newSequenceName => (sequenceName = newSequenceName)}
+      updateBpm={newBpm => (bpm = newBpm)} />
+    <section id="beat-section">
+      <BeatHeaders />
+      {#each instruments as instrument, rowIndex}
+        <!-- Each row in the sequencer renders an Instrument component -->
+        <Instrument
+          label={instrument.label}
+          sample={instrument.sample}
+          sequence={sequence[rowIndex]}
+          updateBeat={(beatIndex, isChecked) => (sequence[rowIndex][beatIndex].checked = isChecked)} />
+      {/each}
+    </section>
   </section>
 </main>
 
 <!-- TODO
+- Need a paused state, the current "stopped" state is more like pause
+- Need triangle shapes
 - Style checked beats with a solid background, then the faded pink on top
 - Move some helpers to utils
 - start and stop the player with space bar
