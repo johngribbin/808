@@ -15,7 +15,7 @@
   }
 
   #vol-header {
-    padding-left: 20px;
+    width: 100%;
   }
 </style>
 

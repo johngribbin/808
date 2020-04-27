@@ -65,6 +65,14 @@
   }
   // Call repeat function in time with the Transport
   Tone.Transport.scheduleRepeat(repeat, "16n");
+
+  // Start and stop player with space bar
+  document.body.onkeyup = event => {
+    if (event.keyCode == 32) {
+      event.preventDefault();
+      playing = !playing;
+    }
+  };
 </script>
 
 <style>
@@ -76,8 +84,8 @@
       ),
       #121115;
     box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.5);
-    height: 100vh;
-    padding-top: 5em;
+    height: 100%;
+    overflow: hidden;
   }
 
   #sequencer {
@@ -85,9 +93,9 @@
     box-shadow: 1px 1px 3px #000000;
     border-radius: 10px;
     color: white;
-    padding: 1em;
+    padding: 2em;
     width: 1200px;
-    margin: 0 auto;
+    margin: 5em auto;
   }
 
   #beat-section {

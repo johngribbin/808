@@ -13,8 +13,7 @@
     -webkit-appearance: none;
     margin: 10px 0;
     margin-left: 0.5em;
-    max-width: 500px;
-    width: 50%;
+    width: 100%;
   }
   input[type="range"]:focus {
     outline: none;

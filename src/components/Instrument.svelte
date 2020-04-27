@@ -24,9 +24,10 @@
 
   label {
     text-transform: uppercase;
+    font-weight: bold;
     text-align: right;
     margin-right: 1em;
-    padding-top: 0.5em;
+    padding-top: 0.7em;
   }
 </style>
 
