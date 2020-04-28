@@ -8,10 +8,9 @@ View the deployed app [here](https://808.surge.sh)
 
 _Note that you will need to have [Node.js](https://nodejs.org) installed to run this app locally_
 
-From command lineInstall the dependencies...
+Install the dependencies...
 
 ```bash
-cd 808/
 yarn install
 ```
 
