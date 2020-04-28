@@ -130,21 +130,17 @@
   </section>
 </main>
 
-<!-- TODO
-- change title of page and get a favicon
-- Need a paused state, the current "stopped" state is more like pause
-
-
-- Caight a bug where "Clear" did work as expected after jamming on a cleared out kit for a few minutes
-- Work out why the slider doesn't change state until you release mouse
-- Move slider into its own component file
-- Not mobile responsive (although I have ideas)
+<!-- Some TO DO's 
+- Tests, starting with some to ensure that the data coming from the presets is always as expected
+- Need a paused state, the current "stop" state is more like "pause"
+- Make a design for mobile
 - Add more instruments (ideally all the 808 sounds)
-- Look into syncing Tone.Transport with Tone.Draw 
-- Look into issue of sounds going out of sync just slightly
-- Add overall volume bar
-- Add some effects like reverb
-- Add a "ramp up" on tempo updates
-- Add a randomized arpeggiator sound to jam along with
-- The value of 16 could be made a variable to toggle, so if changed to 8, then update the number of beats rendered and the repeat function and the "16n" value passed to transport schedule
+- Look into Tone.Draw 
+- Look into issue where extra beats get played when you add a "beat" to the loop when it is playing
+- Add an overall volume bar
+- Add some effects like reverb, delay to the instrument rows
+- Add a "ramp up" effect on tempo updates
+- Add a randomized arpeggiator sound to jam along with (stranger things vibe)
+- The "step" value of 16 could be made into a variable to toggle 
+- Would be cool if on live site someone could create a sequence then click a button to create a unique link they can send to someone so they can hear it too
 -->
