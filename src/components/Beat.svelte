@@ -30,10 +30,8 @@
 
   input {
     background: black;
-    border: 4px solid black;
+    border: 3px solid black;
     border-radius: 50%;
-    height: 50%;
-    width: 50%;
     -webkit-appearance: none;
   }
 

@@ -38,6 +38,10 @@
     text-transform: uppercase;
   }
 
+  button:focus {
+    outline: none;
+  }
+
   button:hover {
     cursor: pointer;
   }
@@ -56,6 +60,7 @@
 </style>
 
 <div>
+  <!-- The "active" class is bound to the button when the name of the preset sequence matches the sequence currently chosen -->
   <button
     class:active={presetSequenceName === sequenceName}
     on:click={updateSequenceAndBpm}>

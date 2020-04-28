@@ -14,5 +14,6 @@
 </style>
 
 <div>
+  <!-- Is bound to the instrumentValue it is passed in the Instrument.svelte component -->
   <Slider value={instrumentVolume} updateValue={editVolume} min={-20} max={0} />
 </div>

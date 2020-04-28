@@ -136,4 +136,5 @@
   }
 </style>
 
+<!-- This component is used by Tempo.svelte and Vol.svelte -->
 <input type="range" bind:value {min} {max} on:input={updateValue(this.value)} />

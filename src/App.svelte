@@ -16,6 +16,7 @@
   import Instrument from "./components/Instrument.svelte";
 
   onMount(async () => {
+    // Start Tone when app mounts
     await Tone.start();
   });
   // BPM of the sequencer
@@ -65,7 +66,6 @@
   }
   // Call repeat function in time with the Transport
   Tone.Transport.scheduleRepeat(repeat, "16n");
-
   // Start and stop player with space bar
   document.body.onkeyup = event => {
     if (event.keyCode == 32) {
@@ -131,17 +131,10 @@
 </main>
 
 <!-- TODO
-- update default volume
 - change title of page and get a favicon
 - Need a paused state, the current "stopped" state is more like pause
-- Need triangle shapes
-- Style checked beats with a solid background, then the faded pink on top
-- Move some helpers to utils
-- start and stop the player with space bar
-- Make slider a component
-- Make two different button components
-- Update all sliders with on:input that was added to volume of instruments
-- Remove export from files not receiving the value
+
+
 - Caight a bug where "Clear" did work as expected after jamming on a cleared out kit for a few minutes
 - Work out why the slider doesn't change state until you release mouse
 - Move slider into its own component file

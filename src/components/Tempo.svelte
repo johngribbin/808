@@ -58,6 +58,6 @@
       on:input={updateBpm(this.value)} />
     BPM
   </label>
-
+  <!-- Is bound to the bpm variable in global app state -->
   <Slider value={bpm} updateValue={updateBpm} min={0} max={200} />
 </div>

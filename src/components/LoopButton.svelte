@@ -35,6 +35,10 @@
     text-transform: uppercase;
   }
 
+  button:focus {
+    outline: none;
+  }
+
   button:hover {
     cursor: pointer;
   }

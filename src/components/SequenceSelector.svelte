@@ -43,6 +43,7 @@
 
 <section>
   <h3>BEATS</h3>
+  <!-- For each preset, render a button which can select a sequence to be played -->
   {#each presets as preset}
     <SequenceButton
       {sequenceName}

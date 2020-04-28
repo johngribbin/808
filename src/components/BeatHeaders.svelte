@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <style>
   section {
     display: grid;

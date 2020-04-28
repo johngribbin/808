@@ -40,6 +40,7 @@
       {instrumentPlayer}
       updateBeat={() => updateBeat(index, !beat.checked)} />
   {/each}
+
   <Vol
     {instrumentVolume}
     editVolume={newVolume => (instrumentVolume = newVolume)} />
