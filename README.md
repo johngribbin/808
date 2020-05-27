@@ -1,6 +1,6 @@
 # 808
 
-View the deployed app [here](https://808.surge.sh)
+A fun little drum sequencer I built using sounds from the famous 808. View the deployed app [here](https://808.surge.sh)
 
 ---
 
